@@ -1,4 +1,9 @@
-# daydaynotes
+# Day Day Notes
+![demo](https://github.com/huihongme/Day-Day-Notes/blob/master/demo/demo1.jpg)
+
+![demo](https://github.com/huihongme/Day-Day-Notes/blob/master/demo/demo2.jpg)
+
+![demo](https://github.com/huihongme/Day-Day-Notes/blob/master/demo/demo3.jpg)
 
 > dayDayNotes for electron-vue
 
