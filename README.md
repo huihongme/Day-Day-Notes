@@ -6,6 +6,9 @@
 ![demo](https://github.com/huihongme/Day-Day-Notes/blob/master/demo/demo3.jpg)
 
 > dayDayNotes for electron-vue
+#### 开始
+#安装依赖
+yarn  || npm i
 
 #### Build Setup
 
