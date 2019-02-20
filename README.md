@@ -6,11 +6,21 @@
 ![demo](https://github.com/huihongme/Day-Day-Notes/blob/master/demo/demo3.jpg)
 
 > dayDayNotes for electron-vue
+
 #### 开始
 
 ``` bash
 # 安装依赖
 yarn  || npm i
+
+```
+
+#### 说明
+
+``` bash
+# 只测试了OS X版
+
+```
 
 #### Build Setup
 
