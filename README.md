@@ -7,7 +7,9 @@
 
 > dayDayNotes for electron-vue
 #### 开始
-#安装依赖
+
+``` bash
+# 安装依赖
 yarn  || npm i
 
 #### Build Setup
