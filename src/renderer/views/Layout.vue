@@ -36,37 +36,37 @@
       <section>
         <router-view></router-view>
       </section>
-      <el-dialog title="偏好设置" :visible.sync="settingDialog">
+      <el-dialog :title="$t('setting.title')" :visible.sync="settingDialog">
         <el-form :model="form" label-width="100px">
-          <el-form-item label="语言">
-            <el-select :value="lang" size="small" @change="langChange" placeholder="请选择语言">
+          <el-form-item :label="$t('setting.lang')">
+            <el-select :value="lang" size="small" @change="langChange">
               <el-option value="zh" label="中文简体"></el-option>
               <el-option value="en" label="English"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="锁定密码">
+          <el-form-item :label="$t('setting.lock_pw')">
             <el-input v-model="form.password" :readonly="pwReadonly" :maxlength="4" :minlength="4" type="password" class="pw-input"></el-input>
-            <el-button type="text" icon="el-icon-delete" @click="pwVisible = true">更改</el-button>
+            <el-button type="text" icon="el-icon-delete" @click="pwVisible = true">{{$t('setting.lock_pw_change')}}</el-button>
           </el-form-item>
         </el-form>
       </el-dialog>
       <el-dialog
-          title="更改密码"
+          :title="$t('setting.password.title')"
           width="350"
           top='0'
           trigger="manual"
           :visible.sync="pwVisible">
           <el-form :model="pwForm" :rules="pwRules" ref="pwForm" label-width="100px">
-            <el-form-item label="原密码：" prop="old_password" v-if="!firstCreate">
-              <el-input v-model="pwForm.old_password" placeholder="原密码" :maxlength="4" :minlength="4" type="password" class="pw-input"></el-input>
+            <el-form-item :label="$t('setting.password.old_pw')" prop="old_password" v-if="!firstCreate">
+              <el-input v-model="pwForm.old_password" :placeholder="$t('setting.password.old_pw')" :maxlength="4" :minlength="4" type="password" class="pw-input"></el-input>
             </el-form-item>
-            <el-form-item label="新密码：" prop="password">
-              <el-input v-model="pwForm.password" placeholder="新密码" :maxlength="4" :minlength="4" type="password" class="pw-input"></el-input>
+            <el-form-item :label="$t('setting.password.new_pw')" prop="password">
+              <el-input v-model="pwForm.password" :placeholder="$t('setting.password.new_pw')" :maxlength="4" :minlength="4" type="password" class="pw-input"></el-input>
             </el-form-item>
           </el-form>
           <div  slot="footer">
-            <el-button size="mini" type="text" @click="delPw">删除密码</el-button>
-            <el-button type="primary" size="mini" @click="submitPw">更新</el-button>
+            <el-button size="mini" type="text" @click="delPw">{{$t('setting.password.btn_del')}}</el-button>
+            <el-button type="primary" size="mini" @click="submitPw">{{$t('setting.password.btn_update')}}</el-button>
           </div>
       </el-dialog>
   </main>
@@ -177,6 +177,7 @@
       },
       langChange (lang) {
         this.$i18n.locale = lang
+        localStorage.setItem('lang', lang)
         this.$store.dispatch('setLang', lang)
       },
       showMessage (text) {
@@ -278,4 +279,5 @@
   main#app-main > aside > ul > li.selected{background-color: rgba(255,255,255,.1)}
   .pw-input.el-input{width:220px;}
   .pw-input .el-input__inner{letter-spacing: 35px;text-indent:15px}
+  .pw-input .el-input__inner::placeholder{letter-spacing: 1px;text-indent: 0}
 </style>

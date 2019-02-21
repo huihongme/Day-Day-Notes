@@ -15,6 +15,19 @@ export default {
   placeholder: {
     note_search: '检索标题'
   },
+  setting: {
+    title: '偏好设置',
+    lang: '语言',
+    password: {
+      title: '更改密码',
+      old_pw: '原密码',
+      new_pw: '新密码',
+      btn_del: '删除密码',
+      btn_update: '更新'
+    },
+    lock_pw: '锁定密码',
+    lock_pw_change: '更改'
+  },
   navs: {
     note: '笔记',
     calendar: '日历',

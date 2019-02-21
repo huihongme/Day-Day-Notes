@@ -15,6 +15,19 @@ export default {
   placeholder: {
     note_search: 'Search title'
   },
+  setting: {
+    title: 'Setting',
+    lang: 'Lang',
+    password: {
+      title: 'Change Lock Password',
+      old_pw: 'Old Pw',
+      new_pw: 'New Pw',
+      btn_del: 'Remove Password',
+      btn_update: 'Update'
+    },
+    lock_pw: 'Lock Pw',
+    lock_pw_change: 'Change'
+  },
   navs: {
     note: 'Notes',
     calendar: 'Calendar',

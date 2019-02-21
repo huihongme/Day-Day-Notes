@@ -2,12 +2,11 @@
   <section class="calendar">
       <!-- <el-button @click="addData">添加</el-button> -->
       <!-- <el-button @click="toDesktop">固定到桌面</el-button> -->
-    <full-calendar :events="calendarData" class="note-calendar" lang="zh"
+    <full-calendar v-if="calendarData.length > 0 && reload" :events="calendarData" class="note-calendar" :lang="lang"
        :style="{width: '100%'}"
        @changeMonth="changeMonth"
        @eventClick="eventClick"
-       @dayClick="dayClick"
-       @moreClick="moreClick">
+    >
     </full-calendar>
     <el-dialog
       title=""
@@ -25,12 +24,24 @@ import { mapState, mapActions } from 'vuex'
 // const { BrowserWindow } = require('electron').remote
 // const { screen } = require('electron')
 // const size = screen.getPrimaryDisplay().size
+// var getLastDay = (d) => {
+//   var current = new Date(d)
+//   var currentMonth = current.getMonth()
+//   var nextMonth = ++currentMonth
+//   var nextMonthDayOne = new Date(current.getFullYear(), nextMonth, 1)
+//   var minusDate = 1000 * 60 * 60 * 24
+//   return new Date(nextMonthDayOne.getTime() - minusDate)
+// }
 
 export default {
   name: 'Calendar',
   data () {
     return {
-      note: {},
+      reload: true,
+      note: {
+        title: '',
+        content: ''
+      },
       noteVisible: false
     }
   },
@@ -38,58 +49,46 @@ export default {
     FullCalendar
   },
   watch: {
+    lang () {
+      this.reload = false
+      setTimeout(() => {
+        this.reload = true
+      }, 100)
+    }
   },
   computed: mapState({
-    calendarData: state => state.notes.calendarData
+    calendarData: state => state.notes.calendarData,
+    lang: state => state.base.lang
   }),
   mounted () {
-    // this.getCalenderData()
   },
   methods: {
-    addData () {
-      let data = {
-        title: 'eeeeeeeee', // 事件内容
-        start: '2019-02-01', // 事件开始时间
-        end: '2019-02-02', // 事件结束时间
-        cssClass: 'red' // 事件的样式   class名（由后台返回数据）  red为自己定义的class名
-      }
-      this.addCalendarData(data)
-    },
     // 选择月份
     changeMonth (start, end, current) {
-      let lastDay = this.getLastDay(current)
-      let month = Number(lastDay.getMonth() + 1)
-      month = month <= 9 ? ('0' + month) : month
-      let date = lastDay.getFullYear() + '-' + month + '-' + lastDay.getDate()
-      let where = [{name: 'updated_at', value: date, symbol: '$lte'}]
-      this.getCalenderData({where: where})
-    },
-    getLastDay (d) {
-      var current = new Date(d)
-      var currentMonth = current.getMonth()
-      var nextMonth = ++currentMonth
-      var nextMonthDayOne = new Date(current.getFullYear(), nextMonth, 1)
-      var minusDate = 1000 * 60 * 60 * 24
-      return new Date(nextMonthDayOne.getTime() - minusDate)
+      console.count()
+      // let lastDay = getLastDay(current)
+      // let month = Number(lastDay.getMonth() + 1)
+      // month = month <= 9 ? ('0' + month) : month
+      // let date = lastDay.getFullYear() + '-' + month + '-' + lastDay.getDate()
+      // let where = [{name: 'updated_at', value: date, symbol: '$lte'}]
+      // this.getCalenderData({where: where})
     },
     // 点击事件
-    eventClick (event, jsEvent, pos) {
+    eventClick (event) {
       this.noteVisible = true
       this.note = event
-      console.log('eventClick', event, jsEvent, pos)
     },
     // 点击当天
-    dayClick (day, jsEvent) {
-      console.log('dayClick', day, jsEvent)
-    },
-    // 查看更多
-    moreClick (day, events, jsEvent) {
-      console.log('moreCLick', day, events, jsEvent)
-    },
+    // dayClick (day, jsEvent) {
+    //   console.log('dayClick', day, jsEvent)
+    // },
+    // // 查看更多
+    // moreClick (day, events, jsEvent) {
+    //   console.log('moreCLick', day, events, jsEvent)
+    // },
     ...mapActions([
       'getCalenderData',
-      'winClose',
-      'addCalendarData'
+      'winClose'
     ])
   }
 }
